@@ -15,9 +15,10 @@
 <meta property="og:site_name" content="The blogs of Heygrandpa">
 <meta property="og:description" content="发现在复原《neural_motifs》实验环境的时候，碰到了一些小问题。在此做一些小记录。">
 <meta property="article:published_time" content="2019-07-07T15:35:31.000Z">
-<meta property="article:modified_time" content="2019-07-12T00:24:30.182Z">
+<meta property="article:modified_time" content="2020-03-06T14:14:28.116Z">
 <meta property="article:author" content="Heygrandpa">
-<meta property="article:tag" content="计算机视觉">
+<meta property="article:tag" content="日记">
+<meta property="article:tag" content="场景图谱生成">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="The blogs of Heygrandpa" type="application/atom+xml">
@@ -170,32 +171,32 @@
       
         <p>发现在复原《neural_motifs》实验环境的时候，碰到了一些小问题。在此做一些小记录。</p>
 <a id="more"></a> 
+
 <p>参考了<a href="https://blog.csdn.net/AAAAshin/article/details/88857137" target="_blank" rel="noopener">这篇博文</a></p>
 <ol>
 <li><p>配置conda虚拟环境<br> 参考 <a href="https://blog.csdn.net/anyao_/article/details/79049937" target="_blank" rel="noopener">博文</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">conda create -n motif python=<span class="number">3.5</span></span><br><span class="line"><span class="comment"># 创建虚拟环境</span></span><br><span class="line"></span><br><span class="line">source activate motif</span><br><span class="line"><span class="comment"># 进入虚拟环境</span></span><br><span class="line"></span><br><span class="line">conda install pytorch=<span class="number">0.3</span><span class="number">.0</span> torchvision=<span class="number">0.2</span><span class="number">.0</span> cuda80 -c pytorch</span><br><span class="line"><span class="comment"># cuda80: 实验室机器的cuda版本是 cuda8.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># conda deactivate</span></span><br><span class="line"><span class="comment"># 退出虚拟环境</span></span><br></pre></td></tr></table></figure>
+
+<p>在国内用默认源下载库的速度会很慢，因此使用清华镜像，所以 conda install 的命令改为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch=<span class="number">0.3</span><span class="number">.0</span> torchvision=<span class="number">0.2</span><span class="number">.0</span> cuda80</span><br><span class="line"><span class="comment"># "-c pytorch" 表示使用默认源下载</span></span><br></pre></td></tr></table></figure>
+<p>可以参考[Anaconda 镜像使用帮助(<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a>)<br>也可以在清华镜像上下载<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/linux-64/" target="_blank" rel="noopener">压缩包</a></p>
 </li>
-</ol>
-<p>   在国内用默认源下载库的速度会很慢，因此使用清华镜像，所以 conda install 的命令改为：<br>   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch=<span class="number">0.3</span><span class="number">.0</span> torchvision=<span class="number">0.2</span><span class="number">.0</span> cuda80</span><br><span class="line"><span class="comment"># "-c pytorch" 表示使用默认源下载</span></span><br></pre></td></tr></table></figure></p>
-<p>   可以参考[Anaconda 镜像使用帮助(<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a>)<br>   也可以在清华镜像上下载<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/linux-64/" target="_blank" rel="noopener">压缩包</a></p>
-<ol start="2">
 <li><p>添加路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PYTHONPATH=/home/lab/zmr/neural_motif</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PYTHONPATH&#x3D;&#x2F;home&#x2F;lab&#x2F;zmr&#x2F;neural_motif</span><br></pre></td></tr></table></figure>
 <p>记得添加路径，不然可能会报错 no module found</p>
 <p>此外，还要修改 config.py中第20行:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">VG_IMAGES = <span class="string">'/home/lab/liangjinrui/neural-motifs/dataset/VG_100K'</span></span><br><span class="line"><span class="comment"># 改为VG图片数据集的地址，不然会报错</span></span><br><span class="line"><span class="comment"># File “/home/lab/zmr/neural_motif/dataloaders/visual_genome.py”, line 260, in load_image_filenames</span></span><br><span class="line"><span class="comment"># assert len(fns) == 108073</span></span><br><span class="line"><span class="comment"># AssertionError</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>运行make</p>
 <p>这时会提醒权限不够，运行指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 ./lib/lstm/highway_lstm_cuda/make.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 .&#x2F;lib&#x2F;lstm&#x2F;highway_lstm_cuda&#x2F;make.sh</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol start="4">
 <li><p>首先训练 object detector。修改 ./scripts/pretrain_detector.sh</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python models/train_detector.py -b 6 -lr 1e-3 -save_dir checkpoints/vgdet -nepoch 50 -ngpu 3 -nwork 3 -p 100 -clip 5</span><br><span class="line"><span class="meta">#</span> 论文用到了3颗GPU，但实验室机器上是单核GPU，因此记得修改为 “-ngpu 1”</span><br></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python models/train_detector.py -b 6 -lr 1e-3 -save_dir checkpoints/vgdet -nepoch 50 -ngpu 3 -nwork 3 -p 100 -clip 5</span><br><span class="line"><span class="meta">#</span><span class="bash"> 论文用到了3颗GPU，但实验室机器上是单核GPU，因此记得修改为 “-ngpu 1”</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>执行指令</p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/pretrain_detector.sh</span><br></pre></td></tr></table></figure>
+
 <p> 如果再次提醒权限不够，再次执行指令</p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 ./scripts/pretrain_detector.sh</span><br></pre></td></tr></table></figure>
 </li>
@@ -204,10 +205,15 @@
 <p> 因为时间有限，运行到 24 个epoch就退出了。</p>
 </li>
 <li><p>接着训练 sgcls。还是要记得修改  ./scripts/train_models_sgcls.sh</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export CUDA_VISIBLE_DEVICES=$1</span><br><span class="line"></span><br><span class="line">if [ $1 == "2" ]; then</span><br><span class="line">    echo "TRAINING THE BASELINE"</span><br><span class="line">    python models/train_rels.py -m sgcls -model motifnet -nl_obj 0 -nl_edge 0 -b 6 \</span><br><span class="line">    -clip 5 -p 100 -pooling_dim 4096 -lr 1e-3 -ngpu 1 -ckpt checkpoints/vgdet/vg-24.tar -save_dir checkpoints/baseline2 \</span><br><span class="line">    -nepoch 50 -use_bias</span><br><span class="line">elif [ $1 == "1" ]; then</span><br><span class="line">    echo "TRAINING MESSAGE PASSING"</span><br><span class="line"></span><br><span class="line">    python models/train_rels.py -m sgcls -model stanford -b 6 -p 100 -lr 1e-3 -ngpu 1 -clip 5 \</span><br><span class="line">    -ckpt checkpoints/vgdet/vg-24.tar -save_dir checkpoints/stanford2</span><br><span class="line">elif [ $1 == "0" ]; then</span><br><span class="line">    echo "TRAINING MOTIFNET"</span><br><span class="line"></span><br><span class="line">    python models/train_rels.py -m sgcls -model motifnet -order leftright -nl_obj 2 -nl_edge 4 -b 6 -clip 5 \</span><br><span class="line">        -p 100 -hidden_dim 512 -pooling_dim 4096 -lr 1e-3 -ngpu 1 -ckpt checkpoints/vgdet/vg-24.tar \</span><br><span class="line">        -save_dir checkpoints/motifnet-sgcls -nepoch 50 -use_bias</span><br><span class="line">fi</span><br><span class="line"><span class="meta">#</span> 因为是在单核GPU上运行，要修改GPU的序号。checkpoint和save路径按照项目文件修改。</span><br></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export CUDA_VISIBLE_DEVICES=$1</span><br><span class="line"></span><br><span class="line">if [ $1 == "2" ]; then</span><br><span class="line">    echo "TRAINING THE BASELINE"</span><br><span class="line">    python models/train_rels.py -m sgcls -model motifnet -nl_obj 0 -nl_edge 0 -b 6 \</span><br><span class="line">    -clip 5 -p 100 -pooling_dim 4096 -lr 1e-3 -ngpu 1 -ckpt checkpoints/vgdet/vg-24.tar -save_dir checkpoints/baseline2 \</span><br><span class="line">    -nepoch 50 -use_bias</span><br><span class="line">elif [ $1 == "1" ]; then</span><br><span class="line">    echo "TRAINING MESSAGE PASSING"</span><br><span class="line"></span><br><span class="line">    python models/train_rels.py -m sgcls -model stanford -b 6 -p 100 -lr 1e-3 -ngpu 1 -clip 5 \</span><br><span class="line">    -ckpt checkpoints/vgdet/vg-24.tar -save_dir checkpoints/stanford2</span><br><span class="line">elif [ $1 == "0" ]; then</span><br><span class="line">    echo "TRAINING MOTIFNET"</span><br><span class="line"></span><br><span class="line">    python models/train_rels.py -m sgcls -model motifnet -order leftright -nl_obj 2 -nl_edge 4 -b 6 -clip 5 \</span><br><span class="line">        -p 100 -hidden_dim 512 -pooling_dim 4096 -lr 1e-3 -ngpu 1 -ckpt checkpoints/vgdet/vg-24.tar \</span><br><span class="line">        -save_dir checkpoints/motifnet-sgcls -nepoch 50 -use_bias</span><br><span class="line">fi</span><br><span class="line"><span class="meta">#</span><span class="bash"> 因为是在单核GPU上运行，要修改GPU的序号。checkpoint和save路径按照项目文件修改。</span></span><br></pre></td></tr></table></figure>
+
+
 </li>
+</ol>
+<ol start="8">
 <li><p>执行指令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/train_models_sgcls.sh 0</span><br></pre></td></tr></table></figure>
+
 <p>如果再次提醒权限不够，如上。</p>
 </li>
 <li><p>sgcls运行结果</p>
@@ -220,8 +226,6 @@
 <li><p>执行指令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/refine_for_detection.sh 0</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol start="12">
 <li><p>SG dectection运行结果</p>
 <p>实验总共有 10 epoch，在单核GPU上，每个 epoch 的运行时间大约为 2.5h</p>
 </li>
@@ -234,9 +238,51 @@
 </ul>
 <p><code>eval_models_sgcls.sh</code> 计算 precls 和 sgcls 的召回率，<code>eval_models_sgdet.sh</code> 计算 sgdet 的召回率</p>
 <p>结果如下：</p>
-<p>|       | Scene Graph Detection | Scene Graph Classification | Predicate Classification |<br>| —– | —– | —- | —- |<br>| Model | R@20   R@50   R@100 | R@20   R@50   R@100 | R@20   R@50   R@100 |<br>| MOTIFNET-LR | 0.201    0.255   0.286 | 0.322   0.351   0.356 | 0.583   0.650    0.669 |</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Scene Graph Detection</th>
+<th>Scene Graph Classification</th>
+<th>Predicate Classification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Model</td>
+<td>R@20   R@50   R@100</td>
+<td>R@20   R@50   R@100</td>
+<td>R@20   R@50   R@100</td>
+</tr>
+<tr>
+<td>MOTIFNET-LR</td>
+<td>0.201    0.255   0.286</td>
+<td>0.322   0.351   0.356</td>
+<td>0.583   0.650    0.669</td>
+</tr>
+</tbody></table>
 <p>论文的实验结果如下：</p>
-<p>|             | Scene Graph Detection  | Scene Graph Classification | Predicate Classification |<br>| ———– | ———————- | ————————– | ———————— |<br>| Model       | R@20   R@50   R@100    | R@20   R@50   R@100        | R@20   R@50   R@100      |<br>| MOTIFNET-LR | 0.214    0.272   0.303 | 0.329   0.358   0.365      | 0.585   0.652    0.671   |</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Scene Graph Detection</th>
+<th>Scene Graph Classification</th>
+<th>Predicate Classification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Model</td>
+<td>R@20   R@50   R@100</td>
+<td>R@20   R@50   R@100</td>
+<td>R@20   R@50   R@100</td>
+</tr>
+<tr>
+<td>MOTIFNET-LR</td>
+<td>0.214    0.272   0.303</td>
+<td>0.329   0.358   0.365</td>
+<td>0.585   0.652    0.671</td>
+</tr>
+</tbody></table>
 </li>
 </ol>
 
@@ -252,7 +298,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机视觉</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">场景图谱生成</a>
         		</li>
       		
 		</ul>
@@ -542,6 +592,14 @@ MathJax.Hub.Queue(function() {
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">红楼梦</a>
               </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">社交关系检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">场景图谱生成</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -591,7 +649,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">双鸭山大学2015级软工学生&lt;br&gt;&lt;br&gt;我很想看到渐次泛白的黎明时分的天宇&lt;br&gt;想喝热气腾腾的牛奶&lt;br&gt;想闻树木的清香&lt;br&gt;想翻晨报的版面&lt;br&gt;——村上春树</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">在大海的黑暗里，&lt;br&gt;粼粼的游鱼是闪电。&lt;br&gt;在人体的黑暗里，&lt;br&gt;粼粼的白骨是闪电。&lt;br&gt;生活，你一片黑暗，&lt;br&gt;而我们本身，就是闪电。&lt;br&gt;——帕斯</div>
   	  	
     	</section>
     
