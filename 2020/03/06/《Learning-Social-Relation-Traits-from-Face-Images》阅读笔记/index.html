@@ -14,15 +14,15 @@
 <meta property="og:url" content="http://yoursite.com/2020/03/06/%E3%80%8ALearning-Social-Relation-Traits-from-Face-Images%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="The blogs of Heygrandpa">
 <meta property="og:description" content="发表于 ICCV 2015 paper">
-<meta property="og:image" content="http://yoursite.com/image/2020-03-06-22-17/model1.jpg">
-<meta property="og:image" content="http://yoursite.com/image/2020-03-06-22-17/model2.jpg">
+<meta property="og:image" content="http://yoursite.com/image/2020-03-06-22-17/model1.png">
+<meta property="og:image" content="http://yoursite.com/image/2020-03-06-22-17/model2.png">
 <meta property="article:published_time" content="2020-03-06T14:17:01.000Z">
-<meta property="article:modified_time" content="2020-03-06T15:22:56.931Z">
+<meta property="article:modified_time" content="2020-04-02T05:10:17.610Z">
 <meta property="article:author" content="Heygrandpa">
 <meta property="article:tag" content="计算机视觉">
 <meta property="article:tag" content="社交关系检测">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/image/2020-03-06-22-17/model1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/image/2020-03-06-22-17/model1.png">
   
     <link rel="alternative" href="/atom.xml" title="The blogs of Heygrandpa" type="application/atom+xml">
   
@@ -217,7 +217,7 @@
 <h4 id="2-2-Social-Relation-Dataset"><a href="#2-2-Social-Relation-Dataset" class="headerlink" title="2.2 Social Relation Dataset"></a>2.2 Social Relation Dataset</h4><ul>
 <li>介绍人工标注的一些细节</li>
 </ul>
-<h4 id="2-3-Baseline-Method"><a href="#2-3-Baseline-Method" class="headerlink" title="2.3 Baseline Method"></a>2.3 Baseline Method</h4><p><img src="/image/2020-03-06-22-17/model1.jpg" alt="Baseline model"></p>
+<h4 id="2-3-Baseline-Method"><a href="#2-3-Baseline-Method" class="headerlink" title="2.3 Baseline Method"></a>2.3 Baseline Method</h4><p><img src="/image/2020-03-06-22-17/model1.png" alt="Baseline model"></p>
 <ul>
 <li><p>Deep Convolution Network (DCN)</p>
 <p>利用两个区别的 DCN 提取 subject 和 object 的特征，为2048维向量</p>
@@ -231,9 +231,10 @@
 <li>the ratio between the faces’ scales（1维）</li>
 </ul>
 <p>三种 position vector 进行 concatenate 作为输入，与上述的 256 维向量 concatenate 到一起</p>
+<p>$$<br>spatial_feature = {x^l, y^l, w^l, h^l, x^r, y^r, w^r, h^r, \frac{x^l - x^r}{w^l}, \frac{y^l - y^r}{h^l}, \frac{w^l}{w^r}}<br>$$</p>
 </li>
 </ul>
-<h4 id="2-4-A-Cross-Dataset-Approachs"><a href="#2-4-A-Cross-Dataset-Approachs" class="headerlink" title="2.4 A Cross-Dataset Approachs"></a>2.4 A Cross-Dataset Approachs</h4><p><img src="/image/2020-03-06-22-17/model2.jpg" alt="Cross-Dataset model"></p>
+<h4 id="2-4-A-Cross-Dataset-Approachs"><a href="#2-4-A-Cross-Dataset-Approachs" class="headerlink" title="2.4 A Cross-Dataset Approachs"></a>2.4 A Cross-Dataset Approachs</h4><p><img src="/image/2020-03-06-22-17/model2.png" alt="Cross-Dataset model"></p>
 <ul>
 <li>引入了3个数据集：AFLW，CeleFaces, Kaggle</li>
 <li>AFLW 只包括 gender + poses, Kaggle 只包括 expression</li>
