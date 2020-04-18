@@ -16,7 +16,7 @@
 <meta property="og:description" content="题目链接NowCoder 题目描述一只青蛙一次可以跳上 1 级台阶，也可以跳上 2 级… 它也可以跳上 n 级。求该青蛙跳上一个 n 级的台阶总共有多少种跳法">
 <meta property="og:image" content="http://yoursite.com/image/2020-04-02-20-51/problem.png">
 <meta property="article:published_time" content="2020-04-02T12:51:40.000Z">
-<meta property="article:modified_time" content="2020-04-06T10:25:48.922Z">
+<meta property="article:modified_time" content="2020-04-15T04:45:48.965Z">
 <meta property="article:author" content="Heygrandpa">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -180,12 +180,12 @@
 <li>如果第一次跳 1 级，则剩下 n - 1级，问题变成跳上 n - 1级有几种跳法？</li>
 <li>如果第一次跳 2 级，则剩下 n - 2级，问题变成跳上 n - 2 级有几种跳法？</li>
 <li>……</li>
-<li>如果第一次跳 n 级，则剩下 0 级，问题变成跳上 0 级有几种跳法？（显然 0 级只有 0种跳法）</li>
+<li>如果第一次跳 n 级，则剩下 0 级，问题变成跳上 0 级有几种跳法？（虽然跳上0级只有0种跳法，但是第一次跳 n 级，第二次跳 0 级算作一种跳法，所以 f(0) = 1）</li>
 </ul>
 <p>显然，第一次跳法有 n 种，剩下 n - i 级（i 为第一次跳楼梯的级数）。</p>
 <p>通过上述这种分析，我们可以把这个问题转换为递归问题来完成。</p>
 <p>我的解法如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">jumpFloorII</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>  (number == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>  (number == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= number; i++) &#123;</span><br><span class="line">            ans += jumpFloorII(number - i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">jumpFloorII</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>  (number == <span class="number">0</span> || number == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= number; i++) &#123;</span><br><span class="line">            ans += jumpFloorII(number - i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -519,6 +519,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多模态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Bert</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>
